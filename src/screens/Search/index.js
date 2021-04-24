@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prefer-stateless-function */
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import styles from './Styles';
 
-class ColorList extends React.Component {
+class Search extends Component {
   render() {
     return (
-      <View style={styles.centeredText}>
-        <Text>Colors List Screen</Text>
+      <View style={styles.container}>
+        <Text>Search Screen</Text>
       </View>
     );
   }
 }
 
-export default ColorList;
+export default Search;
