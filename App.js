@@ -1,20 +1,27 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.centeredText}>
-        <Text>Hello world</Text>
-      </View>
-    );
-  }
-}
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import ColorList from './src/screens/ColorList';
+
+const Stack = createStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <SafeAreaView style={styles.sectionContainer}>
+        <Stack.Navigator>
+          <Stack.Screen name="ColorList" component={ColorList} />
+        </Stack.Navigator>
+      </SafeAreaView>
+    </NavigationContainer>
+  );
+};
+
 const styles = StyleSheet.create({
-  centeredText: {
+  sectionContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
   },
 });
+
 export default App;
