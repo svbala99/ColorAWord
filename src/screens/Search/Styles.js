@@ -1,6 +1,10 @@
+// library imports
 import { StyleSheet } from 'react-native';
+
+// styles
 import globalStyles, { theme } from '../../styles';
 
+// objects destructuring
 const { tiny, small, medium } = globalStyles.fontSize;
 const { variant1, variant2 } = globalStyles.letterSpacing;
 const { light, bold } = globalStyles.fontWeight;

@@ -1,44 +1,31 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
-import { Text, TextInput, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Octicons';
+
+// library imports
+import React from 'react';
+import { Text, View } from 'react-native';
+
+// UI components
+import SearchBar from '../../components/SearchBar';
+
+// constants
 import Strings from '../../constants';
-import globalStyles, { theme } from '../../styles';
+
+// styles
 import styles from './Styles';
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchQuery: '',
-    };
-  }
+const onPress = () => {};
 
-  render() {
-    const { searchQuery } = this.state;
-    const { lightgray, white } = theme.colors;
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text1}>{Strings.color}</Text>
-        <Text style={styles.text2}>{Strings.word}</Text>
-        <View style={styles.searchBarContainer}>
-          <TextInput
-            autoFocus
-            autoCapitalize="words"
-            style={styles.input}
-            placeholderTextColor={lightgray}
-            onChangeText={(text) => { this.setState({ searchQuery: text }); }}
-            value={searchQuery}
-            placeholder="Search"
-          />
-          <View style={styles.searchButtonIcon}>
-            <Icon name="search" size={globalStyles.size.searchIcon} color={white} />
-          </View>
-        </View>
-      </View>
-    );
-  }
-}
-
+/**
+ * @function Search
+ * @description Search Screen implementation
+ * @returns {JSX}
+ */
+const Search = () => (
+  <View style={styles.container}>
+    <Text style={styles.text1}>{Strings.color}</Text>
+    <Text style={styles.text2}>{Strings.word}</Text>
+    <SearchBar onPress={onPress} />
+  </View>
+);
 export default Search;
