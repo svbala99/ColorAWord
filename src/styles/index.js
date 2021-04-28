@@ -2,6 +2,7 @@ import { Dimensions } from 'react-native';
 
 const globalStyles = {
   fontSize: {
+    mini: 16,
     tiny: 20,
     small: 28,
     medium: 32,
@@ -9,6 +10,7 @@ const globalStyles = {
   letterSpacing: {
     variant1: 20,
     variant2: 16,
+    variant3: 4,
   },
   fontWeight: {
     light: '100',
@@ -18,6 +20,7 @@ const globalStyles = {
     size1: 96,
     size2: 48,
     searchIcon: 24,
+    backIcon: 24,
   },
   margin: {
     margin1: 16,

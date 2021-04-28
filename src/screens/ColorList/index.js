@@ -1,15 +1,16 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prefer-stateless-function */
+
+// library imports
 import React from 'react';
-import { Text, View } from 'react-native';
-import styles from './Styles';
+import Header from '../../components/Header';
+
+// styles
 
 class ColorList extends React.Component {
   render() {
     return (
-      <View style={styles.centeredText}>
-        <Text>Colors List Screen</Text>
-      </View>
+      <Header searchQuery="AUTUMN " onBackPress={() => {}} />
     );
   }
 }
