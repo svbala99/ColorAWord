@@ -4,7 +4,7 @@
 // library imports
 import React, { useState } from 'react';
 import { StackActions } from '@react-navigation/native';
-import PropTypes, { any } from 'prop-types';
+import PropTypes from 'prop-types';
 import { FlatList, View } from 'react-native';
 
 // custom UI components

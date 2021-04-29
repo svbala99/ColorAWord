@@ -12,12 +12,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text1: {
-    fontSize: medium,
+    fontSize: small,
     letterSpacing: variant1,
     fontWeight: light,
   },
   text2: {
-    fontSize: small,
+    fontSize: medium,
     letterSpacing: variant1,
     fontWeight: bold,
   },
