@@ -19,18 +19,21 @@ const { black } = theme.colors;
  * @param {searchQuery, onBackPress} props
  * @returns {JSX}
  */
-const Header = ({ searchQuery, onBackPress }) => (
-  <View style={styles.container}>
-    <TouchableOpacity onPress={onBackPress} style={styles.rowContainer}>
-      <Icon name="md-arrow-back" size={globalStyles.size.backIcon} color={black} />
-      <Text style={styles.text2}>{Strings.back}</Text>
-    </TouchableOpacity>
-    <View style={styles.columnContainer}>
-      <Text style={styles.text1}>{Strings.color}</Text>
-      <Text style={styles.text2}>{searchQuery}</Text>
+const Header = (props) => {
+  const { onBackPress, searchQuery } = props;
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={onBackPress} style={styles.rowContainer}>
+        <Icon name="md-arrow-back" size={globalStyles.size.backIcon} color={black} />
+        <Text style={styles.text2}>{Strings.back}</Text>
+      </TouchableOpacity>
+      <View style={styles.columnContainer}>
+        <Text style={styles.text1}>{Strings.color}</Text>
+        <Text style={styles.text2}>{searchQuery.toUpperCase()}</Text>
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 /**
  * Prop types for this functional component

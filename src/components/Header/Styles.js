@@ -2,21 +2,19 @@
 import { StyleSheet } from 'react-native';
 
 // styles
-import globalStyles, { theme } from '../../styles';
+import globalStyles from '../../styles';
 
 // object destructurings
-const { mini, small, medium } = globalStyles.fontSize;
+const { mini } = globalStyles.fontSize;
 const { variant3, variant2 } = globalStyles.letterSpacing;
-const { light, bold } = globalStyles.fontWeight;
-const { size1 } = globalStyles.size;
+const { bold } = globalStyles.fontWeight;
 const { margin1 } = globalStyles.margin;
-const { padding1, padding2 } = globalStyles.padding;
 const {
-  width, searchBarHeight, searchBarBorderRadius, exactCenter,
+  padding1, padding3, padding4,
+} = globalStyles.padding;
+const {
+  searchBarHeight,
 } = globalStyles;
-const {
-  gray, lightgray, black, blue,
-} = theme.colors;
 
 /**
  * Style Object
@@ -40,7 +38,8 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    paddingRight: padding4,
+    paddingVertical: padding3,
   },
   columnContainer: {
     flexDirection: 'column',

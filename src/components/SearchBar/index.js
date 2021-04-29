@@ -28,7 +28,7 @@ const SearchBar = ({ onPress }) => {
         value={text}
         placeholder="Search"
       />
-      <TouchableOpacity onPress={onPress} style={styles.searchButtonIcon}>
+      <TouchableOpacity onPress={() => onPress(text)} style={styles.searchButtonIcon}>
         <Icon name="search" size={globalStyles.size.searchIcon} color={white} />
       </TouchableOpacity>
     </View>

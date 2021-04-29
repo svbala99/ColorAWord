@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     fontWeight: bold,
   },
   searchBarContainer: {
-    marginTop: globalStyles.margin.margin1,
     width: width - size1,
     flexDirection: 'row',
   },
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
     shadowColor: black,
     shadowOpacity: 1,
     elevation: 2,
+    backgroundColor: theme.colors.white,
   },
   searchButtonIcon: {
     backgroundColor: blue,
