@@ -27,8 +27,10 @@ const styles = StyleSheet.create({
     flex: 3,
     borderTopLeftRadius: colorCardBorderRadius,
     borderTopRightRadius: colorCardBorderRadius,
+    justifyContent: 'center',
   },
   centerText: {
+    color: theme.colors.gray,
     fontSize: micro,
     ...exactCenter,
     flex: 1,

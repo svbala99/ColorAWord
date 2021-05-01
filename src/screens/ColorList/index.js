@@ -2,11 +2,11 @@
 /* eslint-disable react/prefer-stateless-function */
 
 // library imports
-import React, {useState, useEffect, Component} from 'react';
-import {StackActions} from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { StackActions } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-import {FlatList, Text, View} from 'react-native';
-import {getColorFromURL} from 'rn-dominant-color';
+import { FlatList, View } from 'react-native';
+import { getColorFromURL } from 'rn-dominant-color';
 
 // custom UI components
 import Header from '../../components/Header';
@@ -17,34 +17,42 @@ import SearchBar from '../../components/SearchBar';
 import styles from './Styles';
 
 // constants
-import {numberOfColorCards, URL} from '../../constants';
+import { numberOfColorCards, URL } from '../../constants';
 
 /**
  * @function ColorList
  * @param {navigation} props
  * @returns {JSX}
  */
-class ColorList extends Component {
-  state = {
-    colors: [],
-    isLoading:false
-  };
+const ColorList = ({ navigation, route }) => {
+  const [colors, setColors] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
-  fetchDominantColors = async () => {
-    let colorList = []
+  /**
+   * @function fetchDominantColors
+   * @returns void
+   * @description fetch dominant colors for each image
+   * @async
+   */
+  const fetchDominantColors = async () => {
+    const colorList = [];
     for (let i = 1; i <= numberOfColorCards; i++) {
       try {
-    this.setState({isLoading:true})
-      let colorDetails = await getColorFromURL(`${URL.picsum}i`)
-      colorList.push(colorDetails.secondary)
-      }
-    catch(e){e.message}  
+        setLoading(true);
+        const colorDetails = await getColorFromURL(`${URL.picsum}i`);
+        colorList.push(colorDetails.secondary);
+      } catch (e) { console.log(e.message); }
     }
-    this.setState({ colors:colorList, isLoading:false })
-  }
-  componentDidMount = () => {
-    this.fetchDominantColors()
+    setColors(colorList);
+    setLoading(false);
   };
+
+  /**
+   * fetch Dominant colors on did mount
+   */
+  useEffect(() => {
+    fetchDominantColors();
+  }, []);
 
   /**
    * @function renderColorCard
@@ -52,37 +60,33 @@ class ColorList extends Component {
    * @returns {JSX}
    * @description Renders each color card
    */
-  renderColorCard = ({ index }) => <ColorCard isLoading={this.state.isLoading} color={this.state.colors[index]}/>;
+  const renderColorCard = ({ index }) => <ColorCard isLoading={isLoading} color={colors[index]} />;
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header
-          searchQuery={this.props.route.params.searchQuery}
-          onBackPress={() => this.props.navigation.dispatch(StackActions.pop())}
+  return (
+    <View style={styles.container}>
+      <Header
+        searchQuery={route.params.searchQuery}
+        onBackPress={() => navigation.dispatch(StackActions.pop())}
+      />
+      <FlatList
+        contentContainerStyle={styles.flatListContainer}
+        horizontal={false}
+        numColumns={2}
+        data={Array(numberOfColorCards)
+          .fill()
+          .map((x, i) => i)}
+        renderItem={renderColorCard}
+        keyExtractor={(item) => item}
+        ListFooterComponent={<View />}
+      />
+      <View style={styles.searchBarContainer}>
+        <SearchBar
+          onPress={(searchQuery) => navigation.dispatch(StackActions.replace('ColorList', { searchQuery }))}
         />
-        <FlatList
-          contentContainerStyle={styles.flatListContainer}
-          horizontal={false}
-          numColumns={2}
-          data={Array(numberOfColorCards)
-            .fill()
-            .map((x, i) => i)}
-          renderItem={this.renderColorCard}
-          keyExtractor={item => item}
-          ListFooterComponent={<View />}
-        />
-        <View style={styles.searchBarContainer}>
-          <SearchBar
-            onPress={searchQuery =>
-              this.props.navigation.dispatch(StackActions.replace('ColorList', {searchQuery}))
-            }
-          />
-        </View>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
 /**
  * Prop types for this functional component

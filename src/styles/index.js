@@ -1,5 +1,9 @@
+// library imports
 import { Dimensions } from 'react-native';
 
+/**
+ * Style objects
+ */
 const globalStyles = {
   fontSize: {
     micro: 14,
@@ -45,6 +49,9 @@ const globalStyles = {
   height: Dimensions.get('screen').height,
 };
 
+/**
+ * Theme colors go here
+ */
 export const theme = {
   colors: {
     white: 'white',
