@@ -68,6 +68,29 @@ cd ios && pod install && cd ..
 npm run ios
 ```
 
+## To generate Android APK
+
+```bash
+gradlew assembleRelease (APK file)
+gradlew bundleRelease (AAB file)
+```
+- For more details: https://reactnative.dev/docs/signed-apk-android
+Note: If you run in Linux, issue ./gradlew instead of gradlew
+
+## Output file location
+
+You will find the APK file in:
+
+```bash
+~PROJECT_LOCATION\android\app\build\outputs\apk\release
+```
+
+## Install the released APK
+
+```bash
+adb install app-release.apk
+```
+
 ## Packages used
 
 | Package                   | Version |
