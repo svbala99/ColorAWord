@@ -12,6 +12,8 @@ target 'ColorAWord' do
     :hermes_enabled => false
   )
 
+  pod 'RNDominantColor', :path => '../node_modules/rn-dominant-color'
+
   target 'ColorAWordTests' do
     inherit! :complete
     # Pods for testing

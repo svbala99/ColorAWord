@@ -2,10 +2,11 @@
 /* eslint-disable react/prefer-stateless-function */
 
 // library imports
-import React, { useState } from 'react';
-import { StackActions } from '@react-navigation/native';
+import React, {useState, useEffect, Component} from 'react';
+import {StackActions} from '@react-navigation/native';
 import PropTypes from 'prop-types';
-import { FlatList, View } from 'react-native';
+import {FlatList, Text, View} from 'react-native';
+import {getColorFromURL} from 'rn-dominant-color';
 
 // custom UI components
 import Header from '../../components/Header';
@@ -15,39 +16,35 @@ import SearchBar from '../../components/SearchBar';
 // styles
 import styles from './Styles';
 
+// constants
+import {numberOfColorCards, URL} from '../../constants';
+
 /**
  * @function ColorList
  * @param {navigation} props
  * @returns {JSX}
  */
-const ColorList = ({ navigation, route }) => {
-  /**
-   * 20 Colors for all the cards - stored in local app state - non-persistent
-   */
-  const [colors, setColors] = useState([
-    '#e6194b',
-    '#3cb44b',
-    '#ffe119',
-    '#4363d8',
-    '#f58231',
-    '#911eb4',
-    '#46f0f0',
-    '#f032e6',
-    '#bcf60c',
-    '#fabebe',
-    '#008080',
-    '#e6beff',
-    '#9a6324',
-    '#fffaac',
-    '#800000',
-    '#aaffc3',
-    '#808000',
-    '#ffd8b1',
-    '#000075',
-    '#808080',
-    '#ff343f',
-    '#000000',
-  ]);
+class ColorList extends Component {
+  state = {
+    colors: [],
+    isLoading:false
+  };
+
+  fetchDominantColors = async () => {
+    let colorList = []
+    for (let i = 1; i <= numberOfColorCards; i++) {
+      try {
+    this.setState({isLoading:true})
+      let colorDetails = await getColorFromURL(`${URL.picsum}i`)
+      colorList.push(colorDetails.secondary)
+      }
+    catch(e){e.message}  
+    }
+    this.setState({ colors:colorList, isLoading:false })
+  }
+  componentDidMount = () => {
+    this.fetchDominantColors()
+  };
 
   /**
    * @function renderColorCard
@@ -55,31 +52,37 @@ const ColorList = ({ navigation, route }) => {
    * @returns {JSX}
    * @description Renders each color card
    */
-  const renderColorCard = ({ item }) => <ColorCard color={item} />;
-  return (
-    <View style={styles.container}>
-      <Header
-        searchQuery={route.params.searchQuery}
-        onBackPress={() => navigation.dispatch(StackActions.pop())}
-      />
-      <FlatList
-        contentContainerStyle={styles.flatListContainer}
-        horizontal={false}
-        numColumns={2}
-        data={colors}
-        renderItem={renderColorCard}
-        keyExtractor={(item) => item}
-        ListFooterComponent={<View />}
-      />
-      <View style={styles.searchBarContainer}>
-        <SearchBar onPress={(searchQuery) => navigation.dispatch(
-          StackActions.replace('ColorList', { searchQuery }),
-        )}
+  renderColorCard = ({ index }) => <ColorCard isLoading={this.state.isLoading} color={this.state.colors[index]}/>;
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Header
+          searchQuery={this.props.route.params.searchQuery}
+          onBackPress={() => this.props.navigation.dispatch(StackActions.pop())}
         />
+        <FlatList
+          contentContainerStyle={styles.flatListContainer}
+          horizontal={false}
+          numColumns={2}
+          data={Array(numberOfColorCards)
+            .fill()
+            .map((x, i) => i)}
+          renderItem={this.renderColorCard}
+          keyExtractor={item => item}
+          ListFooterComponent={<View />}
+        />
+        <View style={styles.searchBarContainer}>
+          <SearchBar
+            onPress={searchQuery =>
+              this.props.navigation.dispatch(StackActions.replace('ColorList', {searchQuery}))
+            }
+          />
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 /**
  * Prop types for this functional component
@@ -98,3 +101,24 @@ ColorList.defaultProps = {
 };
 
 export default ColorList;
+
+// LOGIC TO FETCH IMAGES FROM GOOGLE SEARCH IMAGES API
+
+// fetch(`${URL.googleImageSearch}&q=${this.props.route.params.searchQuery}`)
+//   .then(res => res.json())
+//   .then(data => {
+//     console.log(data)
+//     const imageList = [];
+//     res.items.map(item => {
+//       if (item.pagemap) {
+//         if (item.pagemap.cse_image) {
+//           const targetObj = item.pagemap.cse_image[0].src;
+//           if (targetObj.endsWith('jpg') || targetObj.endsWith('JPG')) {
+//             imageList.push(targetObj);
+//           }
+//         }
+//       }
+//     });
+//     console.log(imageList);
+//   })
+//   .catch(e => e.message);
