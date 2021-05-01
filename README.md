@@ -2,6 +2,12 @@
 
 ### A react native android / ios application, which when given a word as input gives out a list of colors related to that word.
 
+## Screenshots
+
+| Splash |Search 1| Search 2| Colorlist Loading | Colorlist |
+| -------| ------- | -------| ------- | --------|
+|<img src="https://user-images.githubusercontent.com/49264038/116771525-d6628180-aa69-11eb-8c43-a189dc4333bd.jpg" width="200" height="300"/> | <img src="https://user-images.githubusercontent.com/49264038/116771524-d498be00-aa69-11eb-9c5b-7881e4e8bc06.jpg" width="200" height="300"/> | <img src="https://user-images.githubusercontent.com/49264038/116771528-d82c4500-aa69-11eb-9da8-675369db5746.jpg" width="200" height="300"/> |  <img src="https://user-images.githubusercontent.com/49264038/116771527-d793ae80-aa69-11eb-983f-1b63c026d332.jpg" width="200" height="300"/> |  <img src="https://user-images.githubusercontent.com/49264038/116771526-d6628180-aa69-11eb-968c-7f453af1d272.jpg" width="200" height="300"/>
+
 ## Features
 
 - Search for a word and get its related colors according to Google Images Search API
