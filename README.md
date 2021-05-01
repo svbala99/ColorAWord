@@ -2,6 +2,8 @@
 
 ### A react native android / ios application, which when given a word as input gives out a list of colors related to that word.
 
+### Download the APK from:  [Google Drive Link](https://drive.google.com/file/d/1_qWXO7XvTERv_Kmpv-Wy7D1XY-5wvDjX/view?usp=sharing)
+
 ## Screenshots
 
 | Splash |Search 1| Search 2| Colorlist Loading | Colorlist |
